@@ -4,16 +4,21 @@ interface pokedexProps {
 
 }
 
-const pokedex: React.FC = () => {
+const pokemonsArray: string[] = ["Pikachu", "Ditto", "Metapoid", "Magicarp"]
 
-  const [pokemons, setPokemons] = useState<string[]>([]);
-  const [selectedPokemon, setSelectedPokemon] = useState<string | undefined>('PIKACHU');
+const pokedex: React.FC<pokedexProps> = () => {
+
+  const [pokemons, setPokemons] = useState<string[]>(pokemonsArray);
+  const [selectedPokemon, setSelectedPokemon] = useState<string | undefined>('undefined');
 
   return (
     <div>
       <h1>Pokedex</h1>
 
-      <h2>Pokemon Selecionado: {selectedPokemon} </h2>
+      Pokemons:
+      {pokemons.map((pokemon) => <button onClick={() => setSelectedPokemon(pokemon)}>{pokemon}</button>)}
+
+      <h2>Pokemon Selecionado: {selectedPokemon ? selectedPokemon : "Nenhum Pokemon selecionado"} </h2>
     </div>
   );
 
