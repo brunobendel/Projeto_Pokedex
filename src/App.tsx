@@ -7,10 +7,8 @@ interface PokedexProps {
 
 interface PokemonlListInterface {
   name: string
-  url: string
+  national_number: number
 }
-
-///function getDetailsFromPokemon
 
 
 export const Pokedex: React.FC<PokedexProps> = () => {
@@ -28,8 +26,11 @@ export const Pokedex: React.FC<PokedexProps> = () => {
   useEffect(() => {
     if (!selectedPokemon) return;
 
-    axios.get(``).then((response) => setSelectedPokemonDetails(response.data.results))
-    ///Arrumar link dos detalhes do pokemon
+    axios.get(`https://unpkg.com/pokemons@1.1.0/pokemons.json`).then((response) => {
+      console.log(response.data)
+      setSelectedPokemonDetails(response.data.results[0])
+    }
+    )
 
   }, [selectedPokemon])
 
@@ -43,6 +44,7 @@ export const Pokedex: React.FC<PokedexProps> = () => {
       <h2>Pokemon Selecionado: {selectedPokemon?.name || "Nenhum Pokemon selecionado"} </h2>
 
       {JSON.stringify(selectedPokemonDetails, undefined, 2)}
+
 
     </div>
   );
